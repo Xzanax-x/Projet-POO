@@ -1,5 +1,7 @@
 # Projet-POO
 Projet POO
+// ------------Diagramme de classe ---------------- //
+
 classDiagram
     %% --- Cellules ---
     class Cell {
@@ -82,3 +84,4 @@ classDiagram
 
     GuiRenderer --> Grid : affiche
     GuiRenderer ..> Cell : lit
+
