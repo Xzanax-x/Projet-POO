@@ -1,0 +1,82 @@
+POO diagramme de classe 
+classDiagram
+direction TB
+
+class Jeu {
+    - Grille grille
+    - Regle* regle
+    - int nbIterationsMax
+    + void executerModeConsole()
+    + void executerModeGraphique()
+    + bool evolutionTerminee()
+}
+
+class RenduGraphique {
+    - sf::RenderWindow fenetre
+    + RenduGraphique(int tailleCellule, int largeur, int hauteur)
+    + void afficher(const Grille& grille)
+    + bool traiterEvenements()
+}
+
+class Grille {
+    - int largeur
+    - int hauteur
+    - vector<Cellule> cellules
+    + Grille(int l, int h)
+    + void initialiserDepuisFichier(string chemin)
+    + int compterVoisinesVivantes(int x, int y)
+    + void mettreAJour(Regle& regle)
+    + vector<vector<Cellule>>& obtenirCellules()
+}
+
+class Cellule {
+    - int x
+    - int y
+    - EtatCellule* etat
+    + Cellule(int x, int y, EtatCellule* e)
+    + bool estVivante()
+    + void definirEtat(EtatCellule* e)
+    + EtatCellule* obtenirEtat()
+}
+
+class Regle {
+    <<interface>>
+    + EtatCellule* calculerProchainEtat(EtatCellule* courant, int nbVoisinesVivantes)
+}
+
+class RegleDeVie {
+    + EtatCellule* calculerProchainEtat(EtatCellule* courant, int nbVoisinesVivantes)
+}
+
+class EtatCellule {
+    <<interface>>
+    + bool estVivante()
+    + EtatCellule* prochainEtat(int nbVoisinesVivantes)
+}
+
+class EtatVivant {
+    + bool estVivante()
+    + EtatCellule* prochainEtat(int nbVoisinesVivantes)
+}
+
+class EtatMort {
+    + bool estVivante()
+    + EtatCellule* prochainEtat(int nbVoisinesVivantes)
+}
+
+%% Relations
+
+Jeu --> Grille : lit / applique
+Jeu --> RenduGraphique : utilise pour\nafficher
+Jeu --> Regle : applique
+
+RenduGraphique --> Grille : affiche
+
+Grille o-- Cellule : contient
+Grille --> Regle : utilise\npour l'évolution
+
+Cellule --> EtatCellule : possède
+
+Regle <|.. RegleDeVie : implémente
+EtatCellule <|.. EtatVivant : implémente
+EtatCellule <|.. EtatMort : implémente
