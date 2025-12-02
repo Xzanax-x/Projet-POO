@@ -1,0 +1,36 @@
+Diagramme d'activité
+
+flowchart TD
+
+%% Début du programme
+A([Début]) --> B[Lire le fichier d'entrée]
+B --> C[Créer la grille et les cellules]
+
+%% Choix du mode
+C --> D{Choisir le mode}
+D -->|Console| E[Demander le nombre d'itérations]
+D -->|Graphique| F[Créer la fenêtre SFML]
+
+%% -------- MODE CONSOLE --------
+E --> G[Boucle sur les itérations]
+G --> H[Mettre à jour la grille selon la règle]
+H --> I[Écrire l'état dans un fichier]
+I --> J{Grille stable\nou nb max atteint ?}
+J -->|Oui| Z([Fin])
+J -->|Non| G
+
+%% -------- MODE GRAPHIQUE --------
+F --> K{Fenêtre ouverte ?}
+
+K -->|Oui| L[Traiter les événements]
+L --> M[Afficher la grille]
+M --> N[Attendre le délai entre les cycles]
+N --> O[Mettre à jour la grille selon la règle]
+O --> P{Grille stable\nou nb max atteint ?}
+
+%% Si l'automate est stable → on arrête l'évolution, mais on continue d'afficher
+P -->|Oui| M
+P -->|Non| K
+
+%% Si la fenêtre est fermée
+K -->|Non| Z([Fin])
