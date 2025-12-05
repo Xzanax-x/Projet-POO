@@ -10,5 +10,5 @@ public:
     // Calcule le prochain état à partir de l'état courant
     // et du nombre de voisines vivantes
     virtual EtatCellule* calculerProchainEtat(const EtatCellule* etatCourant,
-                                              int nbVoisinesVivantes) const = 0;
+    int nbVoisinesVivantes) const = 0;
 };

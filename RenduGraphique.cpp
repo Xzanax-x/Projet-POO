@@ -35,6 +35,7 @@ void RenduGraphique::afficher(const Grille& grille) {
     for (int x = 0; x < larg; ++x) {
         for (int y = 0; y < haut; ++y) {
             if (cellules[x][y].estVivante()) {
+                formeCellule.setFillColor(sf::Color(230, 180, 200));
                 formeCellule.setPosition(
                     static_cast<float>(x * tailleCellule),
                     static_cast<float>(y * tailleCellule)

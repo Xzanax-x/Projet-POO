@@ -20,6 +20,8 @@ public:
 
     void executerModeConsole(const std::string& fichierEntree);
     void executerModeGraphique();
+    Grille& obtenirGrille();
+    const Grille& obtenirGrille() const;
 
 private:
     bool estStable(const std::vector<std::vector<int>>& precedent,

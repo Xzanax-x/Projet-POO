@@ -76,3 +76,12 @@ void Jeu::executerModeGraphique() {
         }
     }
 }
+Grille& Jeu::obtenirGrille() {
+    return grille;
+}
+
+const Grille& Jeu::obtenirGrille() const {
+    return grille;
+}
+
+
